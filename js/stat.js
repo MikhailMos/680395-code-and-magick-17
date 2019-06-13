@@ -33,7 +33,7 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
-var fontOption = '16px \'PT Mono\'';
+var fontOption = '16px "PT Mono"';
 var textMessages = ['Ура вы победили!', 'Список результатов:'];
 
 window.renderStatistics = function (ctx, names, times) {
@@ -42,7 +42,7 @@ window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#ffffff');
 
-  ctx.fillStyle = '#000';
+  ctx.fillStyle = '#000000';
   ctx.font = fontOption;
   ctx.textBaseline = 'hanging';
   writeText(ctx, textMessages, CLOUD_X + GAP, CLOUD_Y + GAP * 2);
