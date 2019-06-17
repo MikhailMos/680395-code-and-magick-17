@@ -33,11 +33,10 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
-var fontOption = '16px "PT Mono"';
-var textMessages = ['Ура вы победили!', 'Список результатов:'];
-
 window.renderStatistics = function (ctx, names, times) {
   var maxTime = getMaxElement(times);
+  var fontOption = '16px "PT Mono"';
+  var textMessages = ['Ура вы победили!', 'Список результатов:'];
 
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#ffffff');
