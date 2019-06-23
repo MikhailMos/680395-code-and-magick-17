@@ -9,6 +9,15 @@
 
   var onUserDialogOpen = function () {
     userDialog.classList.remove('hidden');
+    if (userDialogDefaultCoodts.y !== 0) {
+      userDialog.style.left = userDialogDefaultCoodts.x + 'px';
+      userDialog.style.top = userDialogDefaultCoodts.y + 'px';
+    } else {
+      // запоминаем начальные координаты
+      userDialogDefaultCoodts.x = userDialog.offsetLeft;
+      userDialogDefaultCoodts.y = userDialog.offsetTop;
+    }
+
     document.addEventListener('keydown', onUserDialogEscPress);
   };
 
@@ -29,6 +38,10 @@
   var dialogHandle = userDialog.querySelector('.upload');
   var userDialogClose = userDialog.querySelector('.setup-close');
   var userDialogOpen = document.querySelector('.setup-open');
+  var userDialogDefaultCoodts = {
+    x: 0,
+    y: 0
+  };
 
   dialogHandle.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
