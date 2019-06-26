@@ -8,6 +8,7 @@
   };
 
   var onUserDialogOpen = function () {
+    window.dialog.isOpened = true;
     userDialog.classList.remove('hidden');
     if (userDialogDefaultCoodts.y !== 0) {
       userDialog.style.left = userDialogDefaultCoodts.x + 'px';
@@ -22,6 +23,7 @@
   };
 
   var onUserDialogClose = function () {
+    window.dialog.isOpened = false;
     userDialog.classList.add('hidden');
     document.removeEventListener('keydown', onUserDialogEscPress);
   };
@@ -34,6 +36,9 @@
     window.utils.isEnterEvent(evt, onUserDialogOpen);
   };
 
+  window.dialog = {
+    isOpened: false
+  };
   var userDialog = document.querySelector('.setup');
   var dialogHandle = userDialog.querySelector('.upload');
   var userDialogClose = userDialog.querySelector('.setup-close');
