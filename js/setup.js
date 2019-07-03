@@ -39,8 +39,10 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  var successHendler = function () {
-    userDialog.classList.add('hidden');
+  var successHendler = function (responsive) {
+    if ((typeof (responsive) === 'object') && (JSON.stringify(responsive).length > 0)) {
+      userDialog.classList.add('hidden');
+    }
   };
 
   var userDialog = document.querySelector('.setup');
