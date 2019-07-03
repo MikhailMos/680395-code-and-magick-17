@@ -29,11 +29,11 @@
 
   var errorHendler = function (errorMessage) {
     var node = document.createElement('div');
-    node.styel = 'z-index: 10; margin: 0 auto; padding: 10px; text-align: center; bacground-color: rgba(239, 32, 32, 0.7);';
+    node.style = 'z-index: 10; margin: 0 auto; padding: 10px; text-align: center; bacground-color: rgba(239, 32, 32, 0.7);';
     node.style.position = 'absolute';
     node.style.left = 0;
     node.style.right = 0;
-    node.styel.fontSize = '25px';
+    node.style.fontSize = '25px';
 
     node.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', node);
