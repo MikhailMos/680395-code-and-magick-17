@@ -42,6 +42,8 @@
   var successHendler = function (responsive) {
     if ((typeof (responsive) === 'object') && (JSON.stringify(responsive).length > 0)) {
       userDialog.classList.add('hidden');
+    } else {
+      errorHendler('Что-то пошло не так!');
     }
   };
 
