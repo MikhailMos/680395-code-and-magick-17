@@ -38,6 +38,7 @@
 
   var successHendler = function (responsive) {
     if ((typeof (responsive) === 'object') && (JSON.stringify(responsive).length > 0)) {
+      form.removeEventListener('submit', window.dialog.saveOnServer);
       userDialog.classList.add('hidden');
     } else {
       errorHendler('Что-то пошло не так!');
@@ -45,6 +46,7 @@
   };
 
   var userDialog = document.querySelector('.setup');
+  var form = userDialog.querySelector('.setup-wizard-form');
   var similarListElement = document.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
