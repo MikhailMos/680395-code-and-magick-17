@@ -1,6 +1,12 @@
 'use strict';
 
 (function () {
+
+  var saveOnServer = function (evt) {
+    window.backend.save(new FormData(form), window.setup.successHendler, window.setup.errorHendler);
+    evt.preventDefault();
+  };
+
   var onUserDialogEscPress = function (evt) {
     if (!evt.target.classList.contains('setup-user-name')) {
       window.utils.isEscEvent(evt, onUserDialogClose);
@@ -20,12 +26,14 @@
     }
 
     document.addEventListener('keydown', onUserDialogEscPress);
+    form.addEventListener('submit', saveOnServer);
   };
 
   var onUserDialogClose = function () {
     window.dialog.isOpened = false;
     userDialog.classList.add('hidden');
     document.removeEventListener('keydown', onUserDialogEscPress);
+    form.removeEventListener('submit', saveOnServer);
   };
 
   var onCloseUserDialogEnterPress = function (evt) {
@@ -37,9 +45,12 @@
   };
 
   window.dialog = {
-    isOpened: false
+    isOpened: false,
+    saveOnServer: saveOnServer
   };
+
   var userDialog = document.querySelector('.setup');
+  var form = userDialog.querySelector('.setup-wizard-form');
   var dialogHandle = userDialog.querySelector('.upload');
   var userDialogClose = userDialog.querySelector('.setup-close');
   var userDialogOpen = document.querySelector('.setup-open');
