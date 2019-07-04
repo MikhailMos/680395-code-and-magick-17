@@ -5,6 +5,7 @@
   var WIZARD_EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
   var FIREBALL_COLOR = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
   var MAX_WIZARD = 5;
+  var STYLE_ERROR = 'position: fixed; top: 0; left: 0; right: 0; font-size: 30px; margin: 0 auto; padding: 10px; text-align: center; background-color: rgba(255, 0, 0, 0.8); z-index: 10;';
 
   var renderWizard = function (wizard) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -29,11 +30,7 @@
 
   var errorHendler = function (errorMessage) {
     var node = document.createElement('div');
-    node.style = 'z-index: 10; margin: 0 auto; padding: 10px; text-align: center; bacground-color: rgba(239, 32, 32, 0.7);';
-    node.style.position = 'absolute';
-    node.style.left = 0;
-    node.style.right = 0;
-    node.style.fontSize = '25px';
+    node.style = STYLE_ERROR;
 
     node.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', node);
