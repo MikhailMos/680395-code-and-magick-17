@@ -45,7 +45,6 @@
   };
 
   var userDialog = document.querySelector('.setup');
-  var form = userDialog.querySelector('.setup-wizard-form');
   var similarListElement = document.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
@@ -57,14 +56,15 @@
   var setupFireballWrap = userDialog.querySelector('.setup-fireball-wrap');
   var inputFireballSetup = setupFireballWrap.querySelector('input');
 
+  window.setup = {
+    successHendler: successHendler,
+    errorHendler: errorHendler
+  };
+
   window.corolize(wizardEyes, WIZARD_EYES_COLOR, inputsWizardEyes[0].defaultValue);
   window.corolize(wizardCoat, WIZARD_COAT_COLOR, inputsWizardColor[0].defaultValue);
   window.corolize(setupFireballWrap, FIREBALL_COLOR, inputFireballSetup.defaultValue);
 
   window.backend.load(loadHendler, errorHendler);
 
-  form.addEventListener('submit', function (evt) {
-    window.backend.save(new FormData(form), successHendler, errorHendler);
-    evt.preventDefault();
-  });
 })();
