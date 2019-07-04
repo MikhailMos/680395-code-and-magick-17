@@ -45,7 +45,8 @@
   };
 
   window.dialog = {
-    isOpened: false
+    isOpened: false,
+    saveOnServer: saveOnServer
   };
 
   var userDialog = document.querySelector('.setup');
