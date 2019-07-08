@@ -4,6 +4,7 @@
 
   window.corolize = function (element, colors, inputDefaultValue) {
     element.addEventListener('click', function (evt) {
+
       var color = colors[window.utils.getRandomInt(0, colors.length)];
       if (element.tagName.toLowerCase() === 'div') {
         inputDefaultValue = color;
@@ -18,7 +19,10 @@
           window.setup.colorCoat = color;
         }
       }
-      window.setup.updateWizards();
+
+      window.debounce(function () {
+        window.setup.updateWizards();
+      });
     });
   };
 })();

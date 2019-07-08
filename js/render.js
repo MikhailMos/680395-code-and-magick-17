@@ -22,7 +22,6 @@
 
     for (var i = 0; i < takeNumber; i++) {
       fragment.appendChild(renderWizard(data[i]));
-      // similarListElement.appendChild(renderWizard(data[i]));
     }
 
     similarListElement.appendChild(fragment);
