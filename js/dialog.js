@@ -1,6 +1,9 @@
 'use strict';
 
 (function () {
+  var WIZARD_COAT_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
+  var WIZARD_EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
+  var FIREBALL_COLOR = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
   var saveOnServer = function (evt) {
     window.backend.save(new FormData(form), window.setup.successHendler, window.setup.errorHendler);
@@ -14,7 +17,7 @@
   };
 
   var onUserDialogOpen = function () {
-    window.dialog.isOpened = true;
+    window.setup.isOpenedDialog = true;
     userDialog.classList.remove('hidden');
     if (userDialogDefaultCoodts.y !== 0) {
       userDialog.style.left = userDialogDefaultCoodts.x + 'px';
@@ -25,12 +28,21 @@
       userDialogDefaultCoodts.y = userDialog.offsetTop;
     }
 
+    window.corolize(wizardEyes, WIZARD_EYES_COLOR, inputsWizardEyes[0].defaultValue);
+    window.corolize(wizardCoat, WIZARD_COAT_COLOR, inputsWizardColor[0].defaultValue);
+    window.corolize(setupFireballWrap, FIREBALL_COLOR, inputFireballSetup.defaultValue);
+
+    window.setup.colorEyes = inputsWizardEyes[0].defaultValue;
+    window.setup.colorCoat = inputsWizardColor[0].defaultValue;
+    window.setup.colorFireball = inputFireballSetup.defaultValue;
+
+    window.setup.updateWizards();
     document.addEventListener('keydown', onUserDialogEscPress);
     form.addEventListener('submit', saveOnServer);
   };
 
   var onUserDialogClose = function () {
-    window.dialog.isOpened = false;
+    window.setup.isOpenedDialog = false;
     userDialog.classList.add('hidden');
     document.removeEventListener('keydown', onUserDialogEscPress);
     form.removeEventListener('submit', saveOnServer);
@@ -45,7 +57,6 @@
   };
 
   window.dialog = {
-    isOpened: false,
     saveOnServer: saveOnServer
   };
 
@@ -58,6 +69,14 @@
     x: 0,
     y: 0
   };
+
+  var setupWizard = userDialog.querySelector('.setup-wizard');
+  var inputsWizardColor = document.getElementsByName('coat-color');
+  var wizardCoat = setupWizard.querySelector('.wizard-coat');
+  var inputsWizardEyes = document.getElementsByName('eyes-color');
+  var wizardEyes = setupWizard.querySelector('.wizard-eyes');
+  var setupFireballWrap = userDialog.querySelector('.setup-fireball-wrap');
+  var inputFireballSetup = setupFireballWrap.querySelector('input');
 
   dialogHandle.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
