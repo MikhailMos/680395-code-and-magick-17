@@ -4,27 +4,39 @@
 
   var STYLE_ERROR = 'position: fixed; top: 0; left: 0; right: 0; font-size: 30px; margin: 0 auto; padding: 10px; text-align: center; background-color: rgba(255, 0, 0, 0.8); z-index: 10;';
 
+  var rank = function (wizard) {
+    var rankWizard = 0;
+
+    if (wizard.colorCoat === window.setup.colorCoat) {
+      rankWizard += 2;
+    }
+    if (wizard.colorEyes === window.setup.colorEyes) {
+      rankWizard += 1;
+    }
+
+    return rankWizard;
+  };
+
+  var namesComparator = function (leftWizard, rightWizard) {
+    if (leftWizard > rightWizard) {
+      return 1;
+    } else if (leftWizard < rightWizard) {
+      return -1;
+    } else {
+      return 0;
+    }
+  };
+
   var updateWizards = function () {
+    var sortWizards = wizards.slice();
 
-    var matchesCoatEyesWizards = wizards.filter(function (it) {
-      return (it.colorCoat === window.setup.colorCoat) && (it.colorEyes === window.setup.colorEyes);
-    });
-
-    var matchesOnlyCoatWizards = wizards.filter(function (it) {
-      return (it.colorCoat === window.setup.colorCoat) && (it.colorEyes !== window.setup.colorEyes);
-    });
-
-    var matchesOnlyEyesWizards = wizards.filter(function (it) {
-      return (it.colorCoat !== window.setup.colorCoat) && (it.colorEyes === window.setup.colorEyes);
-    });
-
-    var otherWizards = wizards.filter(function (it) {
-      return (it.colorCoat !== window.setup.colorCoat) && (it.colorEyes !== window.setup.colorEyes);
-    });
-
-    var sameWizards = [].concat(matchesCoatEyesWizards, matchesOnlyCoatWizards, matchesOnlyEyesWizards, otherWizards);
-
-    window.render(sameWizards);
+    window.render(sortWizards.sort(function (left, right) {
+      var rankDiff = rank(right) - rank(left);
+      if (rankDiff === 0) {
+        rankDiff = namesComparator(left.name, right.name);
+      }
+      return rankDiff;
+    }));
   };
 
   var loadHendler = function (data) {
