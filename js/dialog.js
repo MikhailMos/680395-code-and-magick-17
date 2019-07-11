@@ -5,6 +5,11 @@
   var WIZARD_EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
   var FIREBALL_COLOR = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
+  var Coordinate = function (x, y) {
+    this.x = x;
+    this.y = y;
+  };
+
   var saveOnServer = function (evt) {
     window.backend.save(new FormData(form), window.setup.successHendler, window.setup.errorHendler);
     evt.preventDefault();
@@ -65,10 +70,7 @@
   var dialogHandle = userDialog.querySelector('.upload');
   var userDialogClose = userDialog.querySelector('.setup-close');
   var userDialogOpen = document.querySelector('.setup-open');
-  var userDialogDefaultCoodts = {
-    x: 0,
-    y: 0
-  };
+  var userDialogDefaultCoodts = new Coordinate(0, 0);
 
   var setupWizard = userDialog.querySelector('.setup-wizard');
   var inputsWizardColor = document.getElementsByName('coat-color');
@@ -81,19 +83,13 @@
   dialogHandle.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
-    var startCoodts = {
-      x: evt.clientX,
-      y: evt.clientY
-    };
+    var startCoodts = new Coordinate(evt.clientX, evt.clientY);
 
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
       dragged = true;
 
-      var shift = {
-        x: startCoodts.x - moveEvt.clientX,
-        y: startCoodts.y - moveEvt.clientY
-      };
+      var shift = new Coordinate(startCoodts.x - moveEvt.clientX, startCoodts.y - moveEvt.clientY);
 
       startCoodts = {
         x: moveEvt.clientX,
