@@ -13,6 +13,18 @@
   var saveOnServer = function (evt) {
     window.backend.save(new FormData(form), window.setup.successHendler, window.setup.errorHendler);
     evt.preventDefault();
+
+    var copyWizard = document.querySelector('svg').cloneNode(true);
+
+    copyWizard.querySelector('#wizard-coat').style.fill = wizardCoat.style.fill;
+    copyWizard.querySelector('#wizard-eyes').style.fill = wizardEyes.style.fill;
+
+    var wizardBase64Right = window.svg2base64(copyWizard);
+
+    copyWizard.querySelector('#wizard').setAttribute('transform', 'translate(62, 0) scale(-1, 1)');
+    var wizardBase64Left = window.svg2base64(copyWizard);
+
+    window.restartGame(wizardBase64Right, wizardBase64Left);
   };
 
   var onUserDialogEscPress = function (evt) {
