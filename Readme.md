@@ -1,7 +1,7 @@
 # Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
 
 * Студент: [Михаил Москвин](https://up.htmlacademy.ru/javascript/17/user/680395).
-* Наставник: [Рудов Артем].
+* Наставник: [Артём Рудов](https://htmlacademy.ru/profile/artrudov).
 
 ---
 
